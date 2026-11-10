@@ -1,6 +1,7 @@
 import yfinance as yf
 import streamlit as st
-import yfinance as yf
+
+st.title("5_years Monthly Sharpe Ratio for MFST")
 
 # Define the ticker and risk-free rate
 ticker = 'MSFT'
@@ -21,16 +22,4 @@ std_dev_return = monthly_returns.std()
 # Calculate the Monthly Sharpe Ratio
 monthly_sharpe_ratio = mean_excess_return / std_dev_return
 
-# Fetches 5 years of MSFT data and prints the final overall average closing price.
-st.title("MSFT 5-Year Average Stock Price")
-
-# Fetch 5 years of historical data for MSFT
-data = yf.Ticker("MSFT").history(period="5y")
-
-if not data.empty:
-  # Calculate the total average closing price
-  overall_average = data['Close'].mean()
-  # Print the result directly to the screen
-  st.metric(label="5-Year Average Price", value=f"${overall_average:.2f}")
-else:
-st.error("No data found for MSFT.")
+st.metric(label="Monthly Sharpe Ratio", value=f"{monthly_sharpe_ratio:.2f}")
